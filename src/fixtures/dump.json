@@ -1,0 +1,72 @@
+[
+{
+    "model": "feedback.product",
+    "pk": 1,
+    "fields": {
+        "name": "Macbook Pro 13",
+        "category": "electronics",
+        "description": "New Macbook Pro 13 inch M1",
+        "image": "product_img/macbook.jpg"
+    }
+},
+{
+    "model": "feedback.product",
+    "pk": 2,
+    "fields": {
+        "name": "Яблоко",
+        "category": "fruits",
+        "description": "Польские яблоки",
+        "image": "product_img/apple.jpg"
+    }
+},
+{
+    "model": "feedback.review",
+    "pk": 1,
+    "fields": {
+        "author": 1,
+        "product": 1,
+        "review": "Хорошый ноутбук",
+        "rating": 5
+    }
+},
+{
+    "model": "feedback.review",
+    "pk": 2,
+    "fields": {
+        "author": 2,
+        "product": 1,
+        "review": "Есть недостатки",
+        "rating": 3
+    }
+},
+{
+    "model": "feedback.review",
+    "pk": 3,
+    "fields": {
+        "author": 2,
+        "product": 1,
+        "review": "Пишу еще раз, оказалось все хорошо",
+        "rating": 4
+    }
+},
+{
+    "model": "feedback.review",
+    "pk": 4,
+    "fields": {
+        "author": 3,
+        "product": 2,
+        "review": "Мне понравилось",
+        "rating": 5
+    }
+},
+{
+    "model": "feedback.review",
+    "pk": 5,
+    "fields": {
+        "author": 2,
+        "product": 2,
+        "review": "Качество и вкус хорошие",
+        "rating": 4
+    }
+}
+]
