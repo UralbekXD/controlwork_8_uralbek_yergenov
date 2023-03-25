@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+    Продукт
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/card.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="row gy-5 justify-content-center">
+        <div class="col-12 col-lg-8">
+            <div class="card rounded-1 shadow-sm">
+                <div class="card-body">
+                    <div class="wrapper d-flex mb-3">
+                        <div class="product_img">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img image" alt="product img">
+                            {% else %}
+                                <img src="https://via.placeholder.com/250x250" class="card-img image" alt="product img">
+                            {% endif %}
+                        </div>
+
+                        <div class="info ms-3">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <h6 class="card-subtitle text-muted mb-3">{{ product.category }}</h6>
+
+                            <div class="btn-group" role="group">
+                                <a href="{% url 'product_update' product.pk %}" type="button" class="btn btn-sm btn-warning">Edit</a>
+                                <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modal-product">Delete</a>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modal-product" tabindex="-1"
+                                 aria-labelledby="modal-product-label"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Delete {{ product.name }}</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete it permanently?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                                            <form action="{% url 'product_delete' product.pk %}" method="POST">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">OK</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Description:</h5>
+                    <div class="card-text">{{ product.description }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gy-4 justify-content-center mt-5">
+        <div class="col-12 col-md-8">
+            <h2>Отзывы:</h2>
+        </div>
+    </div>
+
+    <div class="row gy-4 justify-content-center mt-5">
+        <div class="col-12 col-sm-8 shadow p-3 rounded-1">
+            <form action="{% url 'review_add' product.pk %}" method="POST">
+                {% csrf_token %}
+                {{ review_form|crispy }}
+                <button type="submit" class="btn btn-success">Создать</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row gy-4 justify-content-center mt-1">
+        {% for review in reviews %}
+            {% include 'feedback/includes/reviews/review.html' %}
+        {% endfor %}
+    </div>
+{% endblock %}

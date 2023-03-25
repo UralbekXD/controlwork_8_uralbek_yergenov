@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Продукты
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'styles/card.css' %}">
+{% endblock %}
+
+{% block nav_items %}
+    <li class="nav-item">
+        <a href="{% url 'product_create' %}" class="nav-link">
+            Создать
+        </a>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        {% for product in products %}
+            {% include 'feedback/includes/card.html' %}
+        {% endfor %}
+    </div>
+
+    <div class="row my-5">
+        <div class="d-flex justify-content-center">
+            {% include 'feedback/includes/pagination.html' %}
+        </div>
+    </div>
+
+{% endblock %}

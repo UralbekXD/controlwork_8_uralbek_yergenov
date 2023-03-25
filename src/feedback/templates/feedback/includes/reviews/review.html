@@ -1,0 +1,25 @@
+<div class="col-12 col-md-8">
+    <div class="card rounded-0">
+        <div class="card-header bg-white d-flex justify-content-between flex-wrap">
+            <div class="author">
+                <strong>
+                    <u>
+                        {{ review.author }}
+                    </u> - Rating: {{ review.rating }}
+                </strong>
+            </div>
+
+            <div class="email">
+                {% if review.author.email %}
+                    <strong>{{ review.author.email }}</strong>
+                {% else %}
+                    <stron>No Email</stron>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card-body">
+            {{ review.review }}
+        </div>
+    </div>
+</div>

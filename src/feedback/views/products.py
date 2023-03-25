@@ -2,8 +2,8 @@ from django.shortcuts import render, reverse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .models import Product
-from .forms import ProductForm
+from feedback.models import Product
+from feedback.forms import ProductForm, ReviewForm
 
 
 # Create your views here.
@@ -18,6 +18,13 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'feedback/products/product_detail.html'
     context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        product = self.object
+        context['reviews'] = product.product_review.all()
+        context['review_form'] = ReviewForm()
+        return context
 
 
 class ProductAddView(CreateView):
